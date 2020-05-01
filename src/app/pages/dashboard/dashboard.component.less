@@ -1,0 +1,29 @@
+@import '../../../styles.less';
+.dashboard-container {
+    height: 100%;
+    // width: calc(100%-10px);
+    background-color: @black-shade0;
+    margin-left:5px;
+    margin-right:5px;
+    .nav-bar {
+        height: 50px;
+        background-color: @black-shade1;
+    }
+    .shows-list {
+        // height: calc(100% - 50px);
+        width: inherit;
+        background-color: @gray;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .dashboard-container {
+        height:100%;
+        .nav-bar {
+            height: 100px;
+        }
+        .shows-list {
+            // height: calc(100% - 100px);
+        }
+    }
+}

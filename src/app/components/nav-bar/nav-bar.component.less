@@ -1,0 +1,44 @@
+@import '../../../styles.less';
+
+.nav-container {
+    // padding: 5px;
+    display: flex;
+    // flex-flow: row;
+    .brand {
+        width: 123px;
+        height: 49px;
+        left: 60px;
+        top: 20px;
+        color: @text-color;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 49px;
+        flex: 1;
+        // img {
+        //     cursor: pointer;
+        // }
+    }
+    .search-box {
+        flex: 0 1 auto;
+        margin-top: 10px;
+        margin-right: 30px;
+        // position: absolute;
+        width: 30vw;
+        height: 32px;
+        // left: 60%;
+        // top: 10px;
+        border:@border;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-container {
+        flex-flow: column;
+        width: 100%;
+        .search-box {
+            width: 70%;
+        }
+    }
+}

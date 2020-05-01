@@ -1,0 +1,31 @@
+<div class="container">
+    <!-- <div class="show-name"> Top Rated </div> -->
+    <div class="container-header" style="margin-top:30px">TOP RATED</div>
+    <div class="container-item" *ngIf="topRatedList && topRatedList.length>0">
+        <div class="show" *ngFor="let show of topRatedList">
+            <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
+        </div>
+    </div>
+    <div class="container-header" style="margin-top:30px">{{ selectedGenre | uppercase }}</div>
+    <span>
+        <select>
+            <option>Action</option>
+            <option>Thriller</option>
+        </select>
+    </span>
+    <div class="container-item">
+        <div class="show" *ngFor="let show of selectedGenreList">
+            <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
+        </div>
+    </div>
+    <!-- <div class="container-item">
+        <div class="show" *ngFor="let show of displayList">
+            <app-show-card [show]="show"></app-show-card>
+        </div>
+    </div>
+    <div class="container-item">
+        <div class="show" *ngFor="let show of displayList">
+            <app-show-card [show]="show"></app-show-card>
+        </div>
+    </div> -->
+</div>

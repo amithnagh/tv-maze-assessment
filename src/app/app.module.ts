@@ -3,16 +3,34 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ShowsListComponent } from './components/shows-list/shows-list.component';
+import { ShowCardComponent } from './components/show-card/show-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ShowDetailComponent } from './pages/show-detail/show-detail.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    NavBarComponent,
+    ShowsListComponent,
+    ShowCardComponent,
+    PageNotFoundComponent,
+    ShowDetailComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
