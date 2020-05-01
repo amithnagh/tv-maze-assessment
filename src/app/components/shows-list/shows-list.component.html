@@ -1,16 +1,35 @@
-<div class="container">
+<div class="loader" *ngIf="!showList"></div>
+<div class="networkError" *ngIf="networkError">
+    You are facing a network issue... Please try again later...
+</div>
+<div class="container" *ngIf="showList && !networkError">
     <!-- <div class="show-name"> Top Rated </div> -->
+    <div *ngIf="searchText && searchText.length>0" class="container-header" style="margin-top:30px">Results for "{{searchText}}"
+        <span>
+            click to clear
+        </span>
+    </div>
+    <div class="container-item" *ngIf="searchShowList">
+        <div class="show" *ngFor="let search of searchShowList">
+            <app-show-card [show]="search.show" (selectedShow)="selectedShow($event)"></app-show-card>
+        </div>
+    </div>
     <div class="container-header" style="margin-top:30px">TOP RATED</div>
     <div class="container-item" *ngIf="topRatedList && topRatedList.length>0">
         <div class="show" *ngFor="let show of topRatedList">
             <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
         </div>
     </div>
-    <div class="container-header" style="margin-top:30px">{{ selectedGenre | uppercase }}</div>
+    <div class="container-header" style="margin-top:30px">{{ selectedGenre | uppercase }}
+        <span>
+            <img *ngIf="!showGenresDropdown" src="assets/pointing.svg" (click)="showGenres()">
+            <img *ngIf="showGenresDropdown" src="assets/up-arrow.svg" (click)="showGenres()">
+        </span>
+    </div>
+
     <span>
-        <select>
-            <option>Action</option>
-            <option>Thriller</option>
+        <select size="5" [(ngModel)]="selectedGenre" (change)="getDisplayList()" *ngIf="showGenresDropdown">
+            <option [value]="genre" *ngFor="let genre of genres">{{genre}}</option>
         </select>
     </span>
     <div class="container-item">
@@ -18,14 +37,4 @@
             <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
         </div>
     </div>
-    <!-- <div class="container-item">
-        <div class="show" *ngFor="let show of displayList">
-            <app-show-card [show]="show"></app-show-card>
-        </div>
-    </div>
-    <div class="container-item">
-        <div class="show" *ngFor="let show of displayList">
-            <app-show-card [show]="show"></app-show-card>
-        </div>
-    </div> -->
 </div>

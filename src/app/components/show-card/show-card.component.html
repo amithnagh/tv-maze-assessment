@@ -1,10 +1,10 @@
 <div class="container" (click)="onClick()">
-    <img class="medium" [src]="show.image.medium" alt="Loading">
+    <img *ngIf="show.image" class="medium" [src]="show.image.medium" alt="show.name">
     <div class="details">
-        <div style="text-align:center">{{show.name}}</div>
-        <div style="text-align:center">{{show.rating.average}}
+        <div *ngIf="show.name" style="text-align:center">{{show.name}}</div>
+        <div *ngIf="show.rating.average" style="text-align:center">{{show.rating.average}}
             <span>
-                <img src="assets/star.svg" alt="show.name">
+                <img src="assets/star.svg">
             </span>
         </div>
     </div>

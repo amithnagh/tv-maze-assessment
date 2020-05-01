@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { ShowDetails } from '../models/showDetails.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -11,7 +11,27 @@ import { SearchShow } from '../models/searchShows.model';
 })
 export class ShowsDataService {
   url: string;
+  searchKey = new BehaviorSubject<string>('');
+  searchList = new BehaviorSubject<SearchShow[]>(null);
+  searchKeyValue: string;
   constructor(private http: HttpClient) { }
+
+  getSearchText() {
+    return this.searchKey.asObservable();
+  }
+
+  setSearchText(search: string) {
+    console.log('called');
+    this.searchKey.next(search);
+  }
+
+  // setSearchText(search: string) {
+  //   this.searchKey.next(search);
+  //   this.searchKey.subscribe(search => this.searchKeyValue = search);
+  //   this.searchShows(this.searchKeyValue).subscribe(
+  //     (body: Sear)
+  //   );
+  // }
 
   getShows(): Observable<ShowDetails[] | ShowTrackerError> {
     this.url = 'http://api.tvmaze.com/shows';
@@ -24,7 +44,7 @@ export class ShowsDataService {
       )
   }
 
-  searchShows(searchTerm = 'game'): Observable<SearchShow[] | ShowTrackerError> {
+  searchShows(searchTerm: string): Observable<SearchShow[] | ShowTrackerError> {
     this.url = `http://api.tvmaze.com/search/shows?q=${searchTerm}`;
     return this.http.get<SearchShow[]>(this.url)
       .pipe(

@@ -1,0 +1,16 @@
+@import '../../../styles.less';
+.container {
+    label {
+        color: @text-color;
+        font-size: 20px;
+    }
+    label::after {
+        content: ":";
+        color: @text-color;
+    }
+    span {
+        padding-left: 10px;
+        color: white;
+        font-size: 15px;
+    }
+}

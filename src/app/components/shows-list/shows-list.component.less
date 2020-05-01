@@ -5,17 +5,13 @@
     height: 100%;
     width: 100%;
     flex-direction: column;
-    // justify-content: space-around;
-    // overflow: auto;
+    padding-left: 5px;
     .container-item {
         margin-top: 10px;
         overflow: auto;
-        flex: 1;
+        flex-grow: 1;
         border: @border;
         display: flex;
-        // .show-name {
-        //     flex: none;
-        // }
         .show {
             border: 5px solid black;
         }
@@ -27,7 +23,23 @@
     font-weight: bold;
     font-size: 20px;
     color: @text-color;
+    img {
+        cursor: pointer;
+    }
 }   
+
+select {
+    width: 150px;
+    option {
+        padding: 2px;
+        color: white;
+        cursor: pointer;
+        background-color: @black-shade1;
+    }
+    option:hover {
+        background-color: @gray;
+    }
+}
 h4 {
     margin:0;
     padding:0;

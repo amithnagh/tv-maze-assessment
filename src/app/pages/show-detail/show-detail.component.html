@@ -1,3 +1,16 @@
-<p>
-  show-detail works!
-</p>
+<div class="loader" *ngIf="!show"></div>
+<div class="details-main" *ngIf="show && !networkError">
+  <div class="poster">
+    <img [src]="show.image.original" alt="loading" *ngIf="show.image">
+    <div *ngIf="!show.image">No Image Found</div>
+  </div>
+  <div class="details">
+    <app-label *ngIf="show.name" label="Name" [value]="show.name"></app-label>
+    <app-label *ngIf="show.language" label="Language" [value]="show.language"></app-label>
+    <app-label *ngIf="show.genres" label="Genres" [value]="show.genres"></app-label>
+    <app-label *ngIf="show.network" label="Network" [value]="show.network.name"></app-label>
+    <app-label *ngIf="show.premiered" label="Premiered" [value]="show.premiered"></app-label>
+    <app-label *ngIf="show.rating.average" label="Avg Rating" [value]="show.rating.average"></app-label>
+    <div *ngIf="show.summary" [innerHTML]="show.summary"></div>
+  </div>
+</div>

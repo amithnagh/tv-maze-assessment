@@ -7,6 +7,8 @@
 @black-shade1: #404040;
 @gray: #808080;
 @text-color: #0094FF;
+@input-background: #2C2C2E;
+@image-border: @text-color;
 
 * {
     box-sizing: border-box;
@@ -16,4 +18,51 @@ html {
 }
 body {
     margin:0;
+}
+.loader {
+    height:600px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+  border: 6px solid @layer-0;
+  border-radius: 50%;
+  border-top: 6px solid @text-color;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 0.5s linear infinite; /* Safari */
+  animation: spin 0.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: @layer-1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: @text-color; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: @text-color; 
+  }
+
+  .networkError {
+    color: red;
 }
