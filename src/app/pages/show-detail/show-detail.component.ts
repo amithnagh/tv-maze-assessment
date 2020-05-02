@@ -13,7 +13,7 @@ export class ShowDetailComponent implements OnInit {
 
   showId: number;
   show: ShowDetails;
-  networkError: Boolean;
+  networkError: boolean;
   constructor(private activatedRoute: ActivatedRoute, private detailService: ShowsDataService) { }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class ShowDetailComponent implements OnInit {
       (data: ShowDetails) => {
         this.show = data;
       },
-      (err: ShowTrackerError) => { this.networkError = true }
+      (err: ShowTrackerError) => { this.networkError = true; }
     );
   }
 

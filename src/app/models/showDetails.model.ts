@@ -34,7 +34,7 @@ export class ShowDetails {
             code: string;
             timezone: string;
         }
-    }
+    };
     externals: {
         tvrage: number;
         thetvdb: number;
@@ -46,7 +46,7 @@ export class ShowDetails {
     };
     summary: string;
     updated: number;
-    _links: {
+    links: {
         self: {
             href: string;
         },

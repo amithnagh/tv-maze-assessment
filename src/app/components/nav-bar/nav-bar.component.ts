@@ -15,17 +15,17 @@ export class NavBarComponent implements OnInit {
   }
 
   goToHome() {
-    this.router.navigate(["/shows"]);
+    this.router.navigate(['/shows']);
   }
 
   onEnterPress() {
     if (this.searchText && this.searchText.length > 2) {
       this.service.setSearchText(this.searchText);
-      if (this.router.url !== "/shows") {
+      if (this.router.url !== '/shows') {
         this.goToHome();
       }
     } else {
-      alert('Please enter minimum of three characters')
+      alert('Please enter minimum of three characters');
     }
   }
 }

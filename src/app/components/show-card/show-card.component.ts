@@ -20,7 +20,6 @@ export class ShowCardComponent implements OnInit {
   ngOnInit() { }
 
   onClick() {
-    // alert(this.show.id);
     this.selectedShow.emit(this.show.id);
   }
 }

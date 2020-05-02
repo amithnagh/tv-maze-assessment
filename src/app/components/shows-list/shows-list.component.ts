@@ -26,7 +26,7 @@ export class ShowsListComponent implements OnInit {
 
   ngOnInit() {
     this.networkError = false;
-    this.selectedGenre = "Drama";
+    this.selectedGenre = 'Drama';
     this.showsService.getShows()
       .subscribe(
         (data: ShowDetails[]) => {
@@ -39,34 +39,33 @@ export class ShowsListComponent implements OnInit {
       );
     this.subscribeToSearch();
   }
-  //function for fetching search results
+  // function for fetching search results
   search(search: string) {
     this.showsService.searchShows(search).subscribe(
       (body: SearchShow[]) => {
-        this.searchShowList = body
+        this.searchShowList = body;
       },
-      (err) => { this.networkError = true }
+      (err) => { this.networkError = true; }
     );
   }
   subscribeToSearch() {
     this.showsService.getSearchText().subscribe(
       (text) => {
-        if (text.length > 2) {
+        if (text.length) {
           this.searchText = text;
           this.search(this.searchText);
         } else {
-          return;
+          this.searchText = '';
+          this.searchShowList = [];
         }
       }
     );
   }
 
-
-  // function to get unique genres
   getGenres(list: ShowDetails[]) {
-    for (let show in list) {
-      for (let genre in list[show].genres) {
-        this.genres.add(list[show].genres[genre]);
+    for (const show of list) {
+      for (const genre of show.genres) {
+        this.genres.add(genre);
       }
     }
   }
@@ -75,7 +74,7 @@ export class ShowsListComponent implements OnInit {
     this.showGenresDropdown = false;
     this.topRatedList = this.showList.filter(
       (show) => {
-        return show.rating.average > 8.5
+        return show.rating.average > 8.5;
       }
     );
 
@@ -86,8 +85,8 @@ export class ShowsListComponent implements OnInit {
     );
   }
 
-  selectedShow(number) {
-    this.router.navigate([`/shows/${number}`]);
+  selectedShow(num: number) {
+    this.router.navigate([`/shows/${num}`]);
   }
 
   showGenres() {
@@ -96,5 +95,9 @@ export class ShowsListComponent implements OnInit {
     } else {
       this.showGenresDropdown = true;
     }
+  }
+
+  clearSearch() {
+    this.showsService.setSearchText('');
   }
 }

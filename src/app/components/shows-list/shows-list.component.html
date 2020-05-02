@@ -4,14 +4,19 @@
 </div>
 <div class="container" *ngIf="showList && !networkError">
     <!-- <div class="show-name"> Top Rated </div> -->
-    <div *ngIf="searchText && searchText.length>0" class="container-header" style="margin-top:30px">Results for "{{searchText}}"
-        <span>
-            click to clear
+    <div *ngIf="searchText && searchShowList" class="container-header" style="margin-top:30px">Results for "{{searchText}}"
+        <span (click)="clearSearch()">
+            Clear
         </span>
     </div>
-    <div class="container-item" *ngIf="searchShowList">
+    <div class="container-item" *ngIf="searchShowList && searchShowList.length>0">
         <div class="show" *ngFor="let search of searchShowList">
             <app-show-card [show]="search.show" (selectedShow)="selectedShow($event)"></app-show-card>
+        </div>
+    </div>
+    <div class="container-item" *ngIf="searchShowList && searchShowList.length == 0 && searchText">
+        <div >
+            No Results Found for {{searchText}}
         </div>
     </div>
     <div class="container-header" style="margin-top:30px">TOP RATED</div>

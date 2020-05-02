@@ -21,7 +21,6 @@ export class ShowsDataService {
   }
 
   setSearchText(search: string) {
-    console.log('called');
     this.searchKey.next(search);
   }
 
@@ -38,10 +37,10 @@ export class ShowsDataService {
     return this.http.get<ShowDetails[]>(this.url)
       .pipe(
         catchError(err => {
-          return this.handleHttpError(err)
+          return this.handleHttpError(err);
         }
         )
-      )
+      );
   }
 
   searchShows(searchTerm: string): Observable<SearchShow[] | ShowTrackerError> {
@@ -59,14 +58,14 @@ export class ShowsDataService {
     return this.http.get<ShowDetails>(this.url)
       .pipe(
         catchError(err => {
-          return this.handleHttpError(err)
+          return this.handleHttpError(err);
         })
       );
   }
 
   handleHttpError(error: HttpErrorResponse): Observable<ShowTrackerError> {
     // console.log(error);
-    let dataError = new ShowTrackerError();
+    const dataError = new ShowTrackerError();
     dataError.errorNumber = error.status;
     dataError.message = error.statusText;
     dataError.friendlyMessage = 'An errror occurred while retrieving shows';

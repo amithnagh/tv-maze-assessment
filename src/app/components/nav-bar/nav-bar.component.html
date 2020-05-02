@@ -1,8 +1,8 @@
 <div class="nav-container">
-  <div class="brand" (click)="goToHome()">
-    MAZE
+  <div >
+    <div class="brand" (click)="goToHome()">MAZE</div> 
   </div>
   <div class="search-box">
-    <input type="text" placeholder="Search for a show" [(ngModel)]="searchText" (keyup.enter)="onEnterPress()">
+    <input type="text" placeholder="Search by pressing Enter key" [(ngModel)]="searchText" (keyup.enter)="onEnterPress()">
   </div>
 </div>

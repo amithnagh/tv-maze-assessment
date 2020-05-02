@@ -12,7 +12,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ShowDetailComponent } from './pages/show-detail/show-detail.component';
-import { LabelComponent } from './components/label/label.component'
+import { LabelComponent } from './components/label/label.component';
 
 @NgModule({
   declarations: [

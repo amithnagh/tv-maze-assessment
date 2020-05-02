@@ -6,13 +6,8 @@ import { Input } from '@angular/core';
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.less']
 })
-export class LabelComponent implements OnInit {
+export class LabelComponent {
   @Input() label: string;
   @Input() value: any;
-
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }
