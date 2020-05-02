@@ -1,31 +1,30 @@
-<div class="loader" *ngIf="!showList"></div>
+<div class="loader" *ngIf="!showList && !networkError"></div>
 <div class="networkError" *ngIf="networkError">
-    You are facing a network issue... Please try again later...
+    <app-network-error [errorObj] = "error"></app-network-error>
 </div>
 <div class="container" *ngIf="showList && !networkError">
-    <!-- <div class="show-name"> Top Rated </div> -->
-    <div *ngIf="searchText && searchShowList" class="container-header" style="margin-top:30px">Results for "{{searchText}}"
+    <div *ngIf="searchText && searchShowList" class="container-header">Results for "{{searchText}}"
         <span (click)="clearSearch()">
             Clear
         </span>
     </div>
-    <div class="container-item" *ngIf="searchShowList && searchShowList.length>0">
+    <div class="container-item" *ngIf="searchShowList && searchShowListLength > 0">
         <div class="show" *ngFor="let search of searchShowList">
             <app-show-card [show]="search.show" (selectedShow)="selectedShow($event)"></app-show-card>
         </div>
     </div>
-    <div class="container-item" *ngIf="searchShowList && searchShowList.length == 0 && searchText">
-        <div >
+    <div class="container-item" *ngIf="searchShowList && searchShowListLength == 0 && searchText">
+        <div class="no-results">
             No Results Found for {{searchText}}
         </div>
     </div>
-    <div class="container-header" style="margin-top:30px">TOP RATED</div>
+    <div class="container-header">TOP RATED</div>
     <div class="container-item" *ngIf="topRatedList && topRatedList.length>0">
         <div class="show" *ngFor="let show of topRatedList">
             <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
         </div>
     </div>
-    <div class="container-header" style="margin-top:30px">{{ selectedGenre | uppercase }}
+    <div class="container-header">{{ selectedGenre | uppercase }}
         <span>
             <img *ngIf="!showGenresDropdown" src="assets/pointing.svg" (click)="showGenres()">
             <img *ngIf="showGenresDropdown" src="assets/up-arrow.svg" (click)="showGenres()">

@@ -10,31 +10,19 @@ import { SearchShow } from '../models/searchShows.model';
   providedIn: 'root'
 })
 export class ShowsDataService {
-  url: string;
+  baseUrl = 'http://api.tvmaze.com/';
   searchKey = new BehaviorSubject<string>('');
   searchList = new BehaviorSubject<SearchShow[]>(null);
-  searchKeyValue: string;
+
   constructor(private http: HttpClient) { }
 
-  getSearchText() {
-    return this.searchKey.asObservable();
-  }
+  getSearchText = (): Observable<string> => this.searchKey.asObservable();
 
-  setSearchText(search: string) {
-    this.searchKey.next(search);
-  }
-
-  // setSearchText(search: string) {
-  //   this.searchKey.next(search);
-  //   this.searchKey.subscribe(search => this.searchKeyValue = search);
-  //   this.searchShows(this.searchKeyValue).subscribe(
-  //     (body: Sear)
-  //   );
-  // }
+  setSearchText = (search: string): void => this.searchKey.next(search);
 
   getShows(): Observable<ShowDetails[] | ShowTrackerError> {
-    this.url = 'http://api.tvmaze.com/shows';
-    return this.http.get<ShowDetails[]>(this.url)
+    const url = this.baseUrl + 'shows';
+    return this.http.get<ShowDetails[]>(url)
       .pipe(
         catchError(err => {
           return this.handleHttpError(err);
@@ -44,8 +32,8 @@ export class ShowsDataService {
   }
 
   searchShows(searchTerm: string): Observable<SearchShow[] | ShowTrackerError> {
-    this.url = `http://api.tvmaze.com/search/shows?q=${searchTerm}`;
-    return this.http.get<SearchShow[]>(this.url)
+    const url = this.baseUrl + `search/shows?q=${searchTerm}`;
+    return this.http.get<SearchShow[]>(url)
       .pipe(
         catchError(err => {
           return this.handleHttpError(err);
@@ -54,8 +42,8 @@ export class ShowsDataService {
   }
 
   showDetail(showId: number): Observable<ShowDetails | ShowTrackerError> {
-    this.url = `http://api.tvmaze.com/shows/${showId}`;
-    return this.http.get<ShowDetails>(this.url)
+    const url = this.baseUrl + `shows/${showId}`;
+    return this.http.get<ShowDetails>(url)
       .pipe(
         catchError(err => {
           return this.handleHttpError(err);
@@ -64,11 +52,10 @@ export class ShowsDataService {
   }
 
   handleHttpError(error: HttpErrorResponse): Observable<ShowTrackerError> {
-    // console.log(error);
     const dataError = new ShowTrackerError();
     dataError.errorNumber = error.status;
     dataError.message = error.statusText;
-    dataError.friendlyMessage = 'An errror occurred while retrieving shows';
+    dataError.friendlyMessage = 'An error occurred while retrieving shows. Please refresh the page';
     return throwError(dataError);
   }
 }

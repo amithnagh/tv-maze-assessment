@@ -9,5 +9,4 @@ import { Input } from '@angular/core';
 export class LabelComponent {
   @Input() label: string;
   @Input() value: any;
-  constructor() { }
 }

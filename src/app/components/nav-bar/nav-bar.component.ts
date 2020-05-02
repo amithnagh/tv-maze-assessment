@@ -7,18 +7,13 @@ import { ShowsDataService } from '../../services/shows-data.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.less']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
   searchText = '';
   constructor(private router: Router, private service: ShowsDataService) { }
 
-  ngOnInit() {
-  }
+  goToHome = (): Promise<boolean> => this.router.navigate(['']);
 
-  goToHome() {
-    this.router.navigate(['/shows']);
-  }
-
-  onEnterPress() {
+  onEnterPress(): void {
     if (this.searchText && this.searchText.length > 2) {
       this.service.setSearchText(this.searchText);
       if (this.router.url !== '/shows') {

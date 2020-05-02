@@ -1,4 +1,4 @@
-<div class="loader" *ngIf="!show"></div>
+<div class="loader" *ngIf="!show && !networkError"></div>
 <div class="details-main" *ngIf="show && !networkError">
   <div class="poster">
     <img [src]="show.image.original" alt="loading" *ngIf="show.image">
@@ -13,4 +13,7 @@
     <app-label *ngIf="show.rating.average" label="Avg Rating" [value]="show.rating.average"></app-label>
     <div *ngIf="show.summary" [innerHTML]="show.summary"></div>
   </div>
+</div>
+<div class="network error" *ngIf="networkError">
+  <app-network-error [errorObj] = "error"></app-network-error>
 </div>

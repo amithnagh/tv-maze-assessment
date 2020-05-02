@@ -16,7 +16,8 @@ const routes: Routes = [
   },
   // { path: 'shows/:id', component: ShowDetailComponent },
   { path: '', redirectTo: '/shows', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'page-not-found', component: PageNotFoundComponent},
+  { path: '**', redirectTo: '/page-not-found'}
 ];
 
 @NgModule({

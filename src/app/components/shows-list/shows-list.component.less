@@ -10,7 +10,6 @@
         margin-top: 10px;
         overflow: auto;
         flex-grow: 1;
-        border: @border;
         display: flex;
         .show {
             border: 5px solid black;
@@ -23,6 +22,7 @@
     font-weight: bold;
     font-size: 20px;
     color: @text-color;
+    margin-top: 30px;
     img {
         cursor: pointer;
     }
@@ -46,6 +46,9 @@ select {
     option:hover {
         background-color: @gray;
     }
+}
+.no-results {
+    color: white;
 }
 h4 {
     margin:0;

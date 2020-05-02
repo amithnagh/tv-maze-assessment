@@ -1,0 +1,6 @@
+<div class="network-container">
+  <app-label label="Number" [value]="errorObj.errorNumber"></app-label>
+  <app-label label="Message" [value]="errorObj.message"></app-label>
+  <div class="text" *ngIf="errorObj.errorNumber>0">{{ errorObj.friendlyMessage }}</div>
+  <div class="text" *ngIf="errorObj.errorNumber == 0">There is some issue with your network. Please refresh the page.</div>
+</div>

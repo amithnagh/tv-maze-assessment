@@ -1,4 +1,4 @@
-export class ShowDetails {
+export interface ShowDetails {
     id: number;
     url: string;
     name: string;

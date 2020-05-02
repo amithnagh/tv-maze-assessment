@@ -1,6 +1,21 @@
 # TvShows
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.10.
+You can now browse all your favorite Tv shows here which displays shows based on Top Rated and Genre. You can also search for a show.
+
+## Pre-Requisites
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.10 and node
+version 10.16.3
+
+## Installation
+
+Nodejs download (https://nodejs.org). Preferred version is latest LTS
+For installing Angular CLI v7, run `npm install  @angular/cli@7` to install.
+
+## About Angular
+
+Angular is a platform for building desktop and mobile application. For more information regarding Angular please visit `https://angular.io/`
+
 
 ## Development server
 
@@ -18,9 +33,14 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Code Coverage
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `ng test --code-coverage` to generate the coverage report
+
+## Lint
+
+Run `ng lint` to check lint issues
+
 
 ## Further help
 

@@ -12,6 +12,7 @@ import { SearchShow } from '../../models/searchShows.model';
 })
 export class ShowsListComponent implements OnInit {
 
+  searchShowListLength: number;
   showList: ShowDetails[];
   genres: Set<string>;
   displayList: ShowDetails[];
@@ -22,6 +23,7 @@ export class ShowsListComponent implements OnInit {
   showGenresDropdown: boolean;
   searchText: string;
   networkError: boolean;
+  error: ShowTrackerError;
   constructor(private showsService: ShowsDataService, private router: Router) { }
 
   ngOnInit() {
@@ -35,22 +37,28 @@ export class ShowsListComponent implements OnInit {
           this.genres = new Set();
           this.getGenres(this.showList);
         },
-        (err: ShowTrackerError) => this.networkError = true
+        (err: ShowTrackerError) => {
+          this.error = err;
+          this.networkError = true;
+        }
       );
     this.subscribeToSearch();
   }
   // function for fetching search results
-  search(search: string) {
+  search(search: string): void {
     this.showsService.searchShows(search).subscribe(
       (body: SearchShow[]) => {
         this.searchShowList = body;
+        this.searchShowListLength = body.length;
       },
-      (err) => { this.networkError = true; }
+      (err) => {
+        this.error = err;
+        this.networkError = true; }
     );
   }
   subscribeToSearch() {
     this.showsService.getSearchText().subscribe(
-      (text) => {
+      (text: string) => {
         if (text.length) {
           this.searchText = text;
           this.search(this.searchText);
@@ -85,19 +93,9 @@ export class ShowsListComponent implements OnInit {
     );
   }
 
-  selectedShow(num: number) {
-    this.router.navigate([`/shows/${num}`]);
-  }
+  selectedShow = (num: number) => this.router.navigate([`/shows/${num}`]);
 
-  showGenres() {
-    if (this.showGenresDropdown) {
-      this.showGenresDropdown = false;
-    } else {
-      this.showGenresDropdown = true;
-    }
-  }
+  showGenres = () => this.showGenresDropdown = !this.showGenresDropdown;
 
-  clearSearch() {
-    this.showsService.setSearchText('');
-  }
+  clearSearch = () => this.showsService.setSearchText('');
 }

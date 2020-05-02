@@ -13,7 +13,11 @@ describe('NavBarComponent', () => {
 
   beforeEach(async(() => {
     mockDataService = jasmine.createSpyObj(['setSearchText']);
-    mockRouter = jasmine.createSpyObj(['navigate']);
+    // mockRouter = jasmine.createSpyObj(['navigate']);
+    mockRouter = {
+      navigate: () => {},
+      url: '/shows/2'
+    };
     TestBed.configureTestingModule({
       declarations: [NavBarComponent],
       providers: [
@@ -37,6 +41,7 @@ describe('NavBarComponent', () => {
     spyOn(component, 'goToHome');
 
     fixture.debugElement.query(By.css('.brand')).triggerEventHandler('click', null);
+    fixture.detectChanges();
 
     expect(component.goToHome).toHaveBeenCalled();
   });

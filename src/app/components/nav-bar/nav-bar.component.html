@@ -3,6 +3,6 @@
     <div class="brand" (click)="goToHome()">MAZE</div> 
   </div>
   <div class="search-box">
-    <input type="text" placeholder="Search by pressing Enter key" [(ngModel)]="searchText" (keyup.enter)="onEnterPress()">
-  </div>
+    <input type="text" placeholder="Enter Search Text" 
+    [(ngModel)]="searchText" (keyup.enter)="onEnterPress()"><span><img src="assets/search.svg" (click)="onEnterPress()"></span>
 </div>

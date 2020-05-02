@@ -10,16 +10,10 @@ import { EventEmitter } from '@angular/core';
   templateUrl: './show-card.component.html',
   styleUrls: ['./show-card.component.less']
 })
-export class ShowCardComponent implements OnInit {
+export class ShowCardComponent {
 
   @Input() show: ShowDetails;
   @Output() selectedShow = new EventEmitter<number>();
 
-  constructor() { }
-
-  ngOnInit() { }
-
-  onClick() {
-    this.selectedShow.emit(this.show.id);
-  }
+  onClick = (): void => this.selectedShow.emit(this.show.id);
 }

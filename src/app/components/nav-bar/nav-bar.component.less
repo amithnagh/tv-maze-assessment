@@ -1,9 +1,8 @@
 @import '../../../styles.less';
 
 .nav-container {
-    // padding: 5px;
+    height: 100%;
     display: flex;
-    // flex-flow: row;
     .brand {
         width: 123px;
         height: 49px;
@@ -25,10 +24,16 @@
         margin-left: 50%;
         width: 30vw;
         height: 32px;
-        border:@border;
+        // border:@border;
         input {
             height: 100%;
-            width:100%;
+            width:80%;
+        }
+        span {
+            padding-left:2px;
+            img {
+                cursor: pointer;
+            }
         }
     }
 }
@@ -40,6 +45,9 @@
         .search-box {
             margin-left: 0;
             width: 70%;
+            img {
+                display: inline;
+            }
         }
     }
 }

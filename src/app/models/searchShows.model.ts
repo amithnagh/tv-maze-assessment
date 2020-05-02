@@ -1,4 +1,4 @@
-export class SearchShow {
+export interface SearchShow {
     score: number;
     show: {
         id: number;
