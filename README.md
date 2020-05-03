@@ -1,6 +1,6 @@
 # TvShows
 
-You can now browse all your favorite TV shows here. Shows are displayed based on Top Rated and Genre. You can also search for a show.
+You can now browse all your favorite TV shows here.The application have two pages, a dashboard page and a show detail page. You can also search for a show. Show details are fetched using the TV maze api `tvmaze.com/api`.This application is tested on chrome, edge and IE11 and is also mobile responsive.
 
 ## Pre-Requisites
 
@@ -28,14 +28,16 @@ HttpClientModule helps with the functionalities required to fetch the data from 
 
 RxJS(Reactive extensions for Javascript) is a library for reactive programming using observables that makes it easier to compose asynchronous or callback-based code. For more information of usage with angular please visit `https://angular.io/guid/rx-library`
 
-## Naming Convention
+## Naming Convention and Coding Standards
 
 Followed typescript naming convention standards.
 Classes - Pascal Case eg: class Abc,
 Interface - Pascal Case with 'I' at the start eg interface IAbc,
 variables - Camel Case eg: variableName,
 functions - Pascal Case eg: functionName,
-component selector - kebab-case eg: app-component-name
+component selector - kebab-case eg: app-component-name.
+
+Followed single-responsibility principle where each functionality is separated into a class/component. Kept the functions code small and clean. Testing files are named .spec.ts.
 
 ## Dependencies
 

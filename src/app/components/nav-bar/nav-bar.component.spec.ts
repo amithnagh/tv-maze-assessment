@@ -13,7 +13,6 @@ describe('NavBarComponent', () => {
 
   beforeEach(async(() => {
     mockDataService = jasmine.createSpyObj(['setSearchText']);
-    // mockRouter = jasmine.createSpyObj(['navigate']);
     mockRouter = {
       navigate: () => {},
       url: '/shows/2'
