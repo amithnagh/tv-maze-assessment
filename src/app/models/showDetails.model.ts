@@ -1,4 +1,4 @@
-export interface ShowDetails {
+export interface IShowDetails {
     id: number;
     url: string;
     name: string;

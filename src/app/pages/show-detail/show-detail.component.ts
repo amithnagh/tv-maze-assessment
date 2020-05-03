@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ShowDetails } from '../../models/showDetails.model';
+import { IShowDetails } from '../../models/showDetails.model';
 import { ShowsDataService } from '../../services/shows-data.service';
 import { ShowTrackerError } from '../../models/showTrackerError.model';
 
@@ -12,7 +12,7 @@ import { ShowTrackerError } from '../../models/showTrackerError.model';
 export class ShowDetailComponent implements OnInit {
 
   showId: number;
-  show: ShowDetails;
+  show: IShowDetails;
   networkError: boolean;
   error: ShowTrackerError;
   constructor(private activatedRoute: ActivatedRoute,
@@ -26,6 +26,7 @@ export class ShowDetailComponent implements OnInit {
       (params) => this.showId = +params.id
     );
 
+    // check if the url contains a number else route to page not found
     if (isNaN(this.showId)) {
       this.router.navigate(['/page-not-found']);
     } else {
@@ -34,9 +35,10 @@ export class ShowDetailComponent implements OnInit {
 
   }
 
+  // code for fetching the details from api
   fetchDetails(): void {
     this.detailService.showDetail(this.showId).subscribe(
-      (data: ShowDetails) => {
+      (data: IShowDetails) => {
         this.show = data;
       },
       (err: ShowTrackerError) => {

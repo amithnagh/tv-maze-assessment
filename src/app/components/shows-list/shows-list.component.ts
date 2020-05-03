@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowsDataService } from '../../services/shows-data.service';
-import { ShowDetails } from '../../models/showDetails.model';
+import { IShowDetails } from '../../models/showDetails.model';
 import { ShowTrackerError } from '../../models/showTrackerError.model';
-import { Router } from '@angular/router';
-import { SearchShow } from '../../models/searchShows.model';
+import { ISearchShow } from '../../models/searchShows.model';
+import { from } from 'rxjs';
+import { pluck } from 'rxjs/internal/operators/pluck';
 
 @Component({
   selector: 'app-shows-list',
@@ -13,28 +14,29 @@ import { SearchShow } from '../../models/searchShows.model';
 export class ShowsListComponent implements OnInit {
 
   searchShowListLength: number;
-  showList: ShowDetails[];
-  genres: Set<string>;
-  displayList: ShowDetails[];
-  topRatedList: ShowDetails[];
-  selectedGenreList: ShowDetails[];
-  searchShowList: SearchShow[];
+  showList: IShowDetails[];
+  genres: Set<string> = new Set();
+  displayList: IShowDetails[];
+  topRatedList: IShowDetails[];
+  selectedGenreList: IShowDetails[];
+  searchShowList: ISearchShow[];
+  searchShowDetails: IShowDetails [];
   selectedGenre: string;
   showGenresDropdown: boolean;
   searchText: string;
   networkError: boolean;
   error: ShowTrackerError;
-  constructor(private showsService: ShowsDataService, private router: Router) { }
+  topRating: number;
+  constructor(private showsService: ShowsDataService) { }
 
   ngOnInit() {
     this.networkError = false;
     this.selectedGenre = 'Drama';
     this.showsService.getShows()
       .subscribe(
-        (data: ShowDetails[]) => {
+        (data: IShowDetails[]) => {
           this.showList = data;
           this.getDisplayList();
-          this.genres = new Set();
           this.getGenres(this.showList);
         },
         (err: ShowTrackerError) => {
@@ -47,15 +49,25 @@ export class ShowsListComponent implements OnInit {
   // function for fetching search results
   search(search: string): void {
     this.showsService.searchShows(search).subscribe(
-      (body: SearchShow[]) => {
+      (body: ISearchShow[]) => {
         this.searchShowList = body;
         this.searchShowListLength = body.length;
+        this.searchShowDetails = [];
+        // code for getting show details from searchShow list
+        if ( this.searchShowListLength > 0 ) {
+          from(this.searchShowList).pipe(pluck('show')).subscribe(
+            (show: IShowDetails) => {
+              this.searchShowDetails.push(show);
+             }
+          );
+        }
       },
       (err) => {
         this.error = err;
         this.networkError = true; }
     );
   }
+  // code for subscribing to changes in the search box content
   subscribeToSearch() {
     this.showsService.getSearchText().subscribe(
       (text: string) => {
@@ -70,7 +82,8 @@ export class ShowsListComponent implements OnInit {
     );
   }
 
-  getGenres(list: ShowDetails[]) {
+  // code for listing out unique genres from the shows list
+  getGenres(list: IShowDetails[]) {
     for (const show of list) {
       for (const genre of show.genres) {
         this.genres.add(genre);
@@ -78,11 +91,13 @@ export class ShowsListComponent implements OnInit {
     }
   }
 
+  // code for setting the display to the dashboard page with top rated shows and genre based shows
   getDisplayList() {
+    this.topRating = 8.5;
     this.showGenresDropdown = false;
     this.topRatedList = this.showList.filter(
       (show) => {
-        return show.rating.average > 8.5;
+        return show.rating.average > this.topRating;
       }
     );
 
@@ -93,9 +108,12 @@ export class ShowsListComponent implements OnInit {
     );
   }
 
-  selectedShow = (num: number) => this.router.navigate([`/shows/${num}`]);
-
+  // code to toggle the view of genres dropdown
   showGenres = () => this.showGenresDropdown = !this.showGenresDropdown;
 
-  clearSearch = () => this.showsService.setSearchText('');
+  // code to execute when clear button on search list is clicked
+  clearSearch = () => {
+    this.showsService.setSearchText('');
+    this.searchShowDetails = [];
+   }
 }

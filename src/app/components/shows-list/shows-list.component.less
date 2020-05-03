@@ -6,15 +6,6 @@
     width: 100%;
     flex-direction: column;
     padding-left: 5px;
-    .container-item {
-        margin-top: 10px;
-        overflow: auto;
-        flex-grow: 1;
-        display: flex;
-        .show {
-            border: 5px solid black;
-        }
-    }
 }
 .container-header {
     font-family: Montserrat;
@@ -29,7 +20,7 @@
     span {
         padding-left:10px;
         font-size: 15px;
-        color: white;
+        color: @text-color2;
         cursor: pointer;
         text-decoration: underline;
     }
@@ -39,7 +30,7 @@ select {
     width: 150px;
     option {
         padding: 2px;
-        color: white;
+        color: @text-color2;
         cursor: pointer;
         background-color: @black-shade1;
     }
@@ -48,9 +39,5 @@ select {
     }
 }
 .no-results {
-    color: white;
-}
-h4 {
-    margin:0;
-    padding:0;
+    color: @text-color2;
 }

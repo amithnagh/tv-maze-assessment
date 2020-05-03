@@ -2,13 +2,12 @@
 
 @layer-0: black;
 @layer-1: gray;
-@border: 1px solid black;
 @black-shade0: #202020;
 @black-shade1: #404040;
 @gray: #808080;
 @text-color: #0094FF;
-@input-background: #2C2C2E;
 @image-border: @text-color;
+@text-color2: white;
 
 * {
     box-sizing: border-box;
@@ -20,10 +19,10 @@ body {
     margin:0;
 }
 .loader {
-    height:600px;
-    position: absolute;
-    top: 40%;
-    left: 50%;
+  height:600px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
   border: 6px solid @layer-0;
   border-radius: 50%;
   border-top: 6px solid @text-color;
@@ -48,17 +47,14 @@ body {
     width: 10px;
   }
   
-  /* Track */
   ::-webkit-scrollbar-track {
     background: @layer-1; 
   }
    
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: @text-color; 
   }
   
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: @text-color; 
   }

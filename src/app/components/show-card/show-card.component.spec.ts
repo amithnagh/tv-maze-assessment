@@ -2,12 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShowCardComponent } from './show-card.component';
 import { By } from '@angular/platform-browser';
-import { ShowDetails } from '../../models/showDetails.model';
+import { IShowDetails } from '../../models/showDetails.model';
 
 describe('ShowCardComponent', () => {
   let component: ShowCardComponent;
   let fixture: ComponentFixture<ShowCardComponent>;
-  const mockShows: ShowDetails[] = require('../../mocks/shows.mock.json');
+  const mockShows: IShowDetails[] = require('../../mocks/shows.mock.json');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

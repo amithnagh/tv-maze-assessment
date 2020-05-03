@@ -6,7 +6,6 @@ import { ShowsDataService } from '../../services/shows-data.service';
 import { of, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShowTrackerError } from '../../models/showTrackerError.model';
-import { ShowDetails } from '../../models/showDetails.model';
 import { NetworkErrorComponent } from '../../components/network-error/network-error.component';
 
 describe('ShowDetailComponent', () => {

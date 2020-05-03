@@ -1,0 +1,5 @@
+<div class="container-item">
+  <div class="show" *ngFor="let show of showsList">
+      <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
+  </div>
+</div>

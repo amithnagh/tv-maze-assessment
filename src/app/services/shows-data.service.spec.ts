@@ -1,17 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ShowsDataService } from './shows-data.service';
-import { ShowDetails } from '../models/showDetails.model';
+import { IShowDetails } from '../models/showDetails.model';
 import { TestRequest } from '@angular/common/http/testing';
 import { ShowTrackerError } from '../models/showTrackerError.model';
-import { SearchShow } from '../models/searchShows.model';
+import { ISearchShow } from '../models/searchShows.model';
 import { HttpRequest } from '@angular/common/http';
 
 describe('ShowsDataService', () => {
   let showsDataService: ShowsDataService;
   let httpTestingController: HttpTestingController;
-  const mockShows: ShowDetails[] = require('../mocks/shows.mock.json');
-  const mockSearch: SearchShow[] = require('../mocks/search.mock.json');
+  const mockShows: IShowDetails[] = require('../mocks/shows.mock.json');
+  const mockSearch: ISearchShow[] = require('../mocks/search.mock.json');
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -32,7 +32,7 @@ describe('ShowsDataService', () => {
 
   it('should GET all shows', () => {
     showsDataService.getShows().subscribe(
-      (data: ShowDetails[]) => {
+      (data: IShowDetails[]) => {
         expect(data.length).toBe(3);
       }
     );
@@ -46,7 +46,7 @@ describe('ShowsDataService', () => {
   it('should GET all shows returned from search', () => {
     const searchTerm = 'all';
     showsDataService.searchShows(searchTerm).subscribe(
-      (body: SearchShow[]) => {
+      (body: ISearchShow[]) => {
         expect(body.length).toBe(3);
       }
     );
@@ -61,7 +61,7 @@ describe('ShowsDataService', () => {
   it('should GET the details of the show correctly', () => {
     const showId = 1;
     showsDataService.showDetail(showId).subscribe(
-      (body: ShowDetails) => {
+      (body: IShowDetails) => {
         expect(body.id).toBe(1);
       }
     );
@@ -75,7 +75,7 @@ describe('ShowsDataService', () => {
 
   it('should return show tracker error', () => {
     showsDataService.getShows().subscribe(
-      (data: ShowDetails[]) => fail('this should return an error'),
+      (data: IShowDetails[]) => fail('this should return an error'),
       (err: ShowTrackerError) => {
         expect(err.errorNumber).toBe(500);
       }
@@ -92,7 +92,7 @@ describe('ShowsDataService', () => {
   it('should return show tracker error when search api return error', () => {
     const searchTerm = 'all';
     showsDataService.searchShows(searchTerm).subscribe(
-      (data: SearchShow[]) => fail('this should return an error'),
+      (data: ISearchShow[]) => fail('this should return an error'),
       (err: ShowTrackerError) => {
         expect(err.errorNumber).toBe(500);
       }
@@ -109,7 +109,7 @@ describe('ShowsDataService', () => {
   it('should return show tracker error when show detail api return error', () => {
     const showId = 1;
     showsDataService.showDetail(showId).subscribe(
-      (data: ShowDetails) => fail('this should return an error'),
+      (data: IShowDetails) => fail('this should return an error'),
       (err: ShowTrackerError) => {
         expect(err.errorNumber).toBe(500);
       }

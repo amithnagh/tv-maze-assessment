@@ -1,26 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ShowsListComponent } from './shows-list.component';
-import { Router } from '@angular/router';
 import { ShowsDataService } from '../../services/shows-data.service';
 import { of, Observable, throwError } from 'rxjs';
-import { ShowDetails } from '../../models/showDetails.model';
+import { IShowDetails } from '../../models/showDetails.model';
 import { ShowCardComponent } from '../show-card/show-card.component';
 import { FormsModule } from '@angular/forms';
-import { SearchShow } from '../../models/searchShows.model';
+import { ISearchShow } from '../../models/searchShows.model';
 import { By } from '@angular/platform-browser';
 import { ShowTrackerError } from '../../models/showTrackerError.model';
 import { NetworkErrorComponent } from '../network-error/network-error.component';
 import { LabelComponent } from '../label/label.component';
+import { CardContainerComponent } from '../card-container/card-container.component';
+import { Router } from '@angular/router';
 
 describe('ShowsListComponent', () => {
   let component: ShowsListComponent;
   let fixture: ComponentFixture<ShowsListComponent>;
-  let mockRouter;
   let mockDataService;
-  const mockShows: ShowDetails[] = require('../../mocks/shows.mock.json');
-  const mockSearch: SearchShow [] = require('../../mocks/search.mock.json');
+  const mockShows: IShowDetails[] = require('../../mocks/shows.mock.json');
+  const mockSearch: ISearchShow [] = require('../../mocks/search.mock.json');
   const mockError: ShowTrackerError = require('../../mocks/showTracker.mock.json');
+  let mockRouter;
 
   beforeEach(async(() => {
     mockRouter = jasmine.createSpyObj(['navigate']);
@@ -30,11 +30,12 @@ describe('ShowsListComponent', () => {
         ShowsListComponent,
         ShowCardComponent,
         NetworkErrorComponent,
-        LabelComponent
+        LabelComponent,
+        CardContainerComponent
       ],
       providers: [
-        { provide: Router, useValue: mockRouter},
-        { provide: ShowsDataService, useValue: mockDataService }
+        { provide: ShowsDataService, useValue: mockDataService },
+        { provide: Router, useValue: mockRouter}
       ],
       imports: [
         FormsModule
@@ -80,23 +81,6 @@ describe('ShowsListComponent', () => {
     expect(component.selectedGenreList.length).toBe(2);
   });
 
-  it('should call get Details', () => {
-    spyOn(fixture.componentInstance, 'selectedShow');
-    component.getDisplayList();
-    expect(component.topRatedList.length).toBe(1);
-
-    const showCards = fixture.debugElement.queryAll(By.directive(ShowCardComponent));
-
-    showCards[0].triggerEventHandler('selectedShow', showCards[0].componentInstance.show.id);
-    expect(fixture.componentInstance.selectedShow).toHaveBeenCalledWith(component.topRatedList[0].id);
-  });
-
-  it('should call navigate when selectedshow is called', () => {
-    component.selectedShow(2);
-
-    expect(mockRouter.navigate).toHaveBeenCalled();
-  });
-
   it('should toggle show genre dropdown ', () => {
     component.showGenresDropdown = true;
     component.showGenres();
@@ -123,6 +107,15 @@ describe('ShowsListComponent', () => {
     mockDataService.getSearchText.and.returnValue(of(''));
     component.subscribeToSearch();
     expect(component.search).not.toHaveBeenCalled();
+  });
+
+  it('should not call from Event of rxjs if searchShowList is empty', () => {
+    const searchText = 'abcdef';
+    mockDataService.searchShows.and.returnValue(of([]));
+
+    component.search(searchText);
+
+    expect(component.searchShowDetails.length).toBe(0);
   });
 
 });

@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { ShowDetailComponent } from './pages/show-detail/show-detail.component';
 import { LabelComponent } from './components/label/label.component';
 import { NetworkErrorComponent } from './components/network-error/network-error.component';
+import { CardContainerComponent } from './components/card-container/card-container.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NetworkErrorComponent } from './components/network-error/network-error.
     PageNotFoundComponent,
     ShowDetailComponent,
     LabelComponent,
-    NetworkErrorComponent
+    NetworkErrorComponent,
+    CardContainerComponent
   ],
   imports: [
     BrowserModule,

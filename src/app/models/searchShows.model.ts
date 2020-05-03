@@ -1,4 +1,4 @@
-export interface SearchShow {
+export interface ISearchShow {
     score: number;
     show: {
         id: number;

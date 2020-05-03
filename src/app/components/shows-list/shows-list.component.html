@@ -8,22 +8,14 @@
             Clear
         </span>
     </div>
-    <div class="container-item" *ngIf="searchShowList && searchShowListLength > 0">
-        <div class="show" *ngFor="let search of searchShowList">
-            <app-show-card [show]="search.show" (selectedShow)="selectedShow($event)"></app-show-card>
-        </div>
-    </div>
+    <app-card-container *ngIf="searchShowList && searchShowListLength > 0" [showsList]="searchShowDetails"></app-card-container>
     <div class="container-item" *ngIf="searchShowList && searchShowListLength == 0 && searchText">
         <div class="no-results">
             No Results Found for {{searchText}}
         </div>
     </div>
     <div class="container-header">TOP RATED</div>
-    <div class="container-item" *ngIf="topRatedList && topRatedList.length>0">
-        <div class="show" *ngFor="let show of topRatedList">
-            <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
-        </div>
-    </div>
+    <app-card-container *ngIf="topRatedList && topRatedList.length>0" [showsList]="topRatedList"></app-card-container>
     <div class="container-header">{{ selectedGenre | uppercase }}
         <span>
             <img *ngIf="!showGenresDropdown" src="assets/pointing.svg" (click)="showGenres()">
@@ -31,14 +23,10 @@
         </span>
     </div>
 
-    <span>
+    <div>
         <select size="5" [(ngModel)]="selectedGenre" (change)="getDisplayList()" *ngIf="showGenresDropdown">
             <option [value]="genre" *ngFor="let genre of genres">{{genre}}</option>
         </select>
-    </span>
-    <div class="container-item">
-        <div class="show" *ngFor="let show of selectedGenreList">
-            <app-show-card [show]="show" (selectedShow)="selectedShow($event)"></app-show-card>
-        </div>
     </div>
+    <app-card-container [showsList]="selectedGenreList"></app-card-container>
 </div>
