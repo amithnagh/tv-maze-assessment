@@ -1,6 +1,6 @@
 # TvShows
 
-You can now browse all your favorite Tv shows here. Shows are displayed based on Top Rated and Genre. You can also search for a show.
+You can now browse all your favorite TV shows here. Shows are displayed based on Top Rated and Genre. You can also search for a show.
 
 ## Pre-Requisites
 
@@ -13,7 +13,7 @@ Angular is a platform for building desktop and mobile application. For more info
 
 ## Installation
 
-Nodejs download (https://nodejs.org). Preferred version is latest LTS
+Nodejs download (https://nodejs.org). Preferred version is latest LTS.
 For installing Angular CLI v7, run `npm install  @angular/cli@7` to install.
 
 ## LESS(Leaner style sheets)
@@ -31,25 +31,25 @@ RxJS(Reactive extensions for Javascript) is a library for reactive programming u
 ## Naming Convention
 
 Followed typescript naming convention standards.
-Classes - Pascal Case eg: class Abc
-Interface - Pascal Case with 'I' at the start eg interface IAbc
-variables - Camel Case eg: variableName
-functions - Pascal Case eg: functionName
+Classes - Pascal Case eg: class Abc,
+Interface - Pascal Case with 'I' at the start eg interface IAbc,
+variables - Camel Case eg: variableName,
+functions - Pascal Case eg: functionName,
 component selector - kebab-case eg: app-component-name
 
 ## Dependencies
 
 All the project dependencies are listed out in package.json under two sections dependencies and devDependencies. DevDependencies are needed to develop the code and run in local machine server provided by npm.
 
-## Running the project
+## Running the Project
 
 After the basic set up of node and Angular Cli as mentioned above is done, open the code folder and run `npm install` which installs all the required dependancies.
 
-## Development server
+## Development Server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files or alternatively can run `npm start`
 
-## Code scaffolding
+## Code Scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
