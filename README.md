@@ -1,4 +1,4 @@
-# TvShows
+# TvShows.
 
 You can now browse all your favorite TV shows here.The application have two pages, a dashboard page and a show detail page. You can also search for a show. Show details are fetched using the TV maze api `tvmaze.com/api`.This application is tested on chrome, edge and IE11 and is also mobile responsive.
 
